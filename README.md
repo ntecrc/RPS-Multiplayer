@@ -1,37 +1,61 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="en-us">
 
-You can use the [editor on GitHub](https://github.com/ntecrc/RPS-Multiplayer/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Part 7</title>
+</head>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<body>
 
-### Markdown
+  <div id="game">
+    <p>Press r, p or s to start playing!</p>
+  </div>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+  <script type="text/javascript">
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerChoices = ["r", "p", "s"];
+    // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+    var wins = 0;
+    var losses = 0;
+    var ties = 0;
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+      // Determines which key was pressed.
+      var userGuess = event.key;
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      // Reworked our code from last step to use "else if" instead of lots of if statements.
+      // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
+      if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+        if ((userGuess === "r") && (computerGuess === "s")) {
+          wins++;
+        } else if ((userGuess === "r") && (computerGuess === "p")) {
+          losses++;
+        } else if ((userGuess === "s") && (computerGuess === "r")) {
+          losses++;
+        } else if ((userGuess === "s") && (computerGuess === "p")) {
+          wins++;
+        } else if ((userGuess === "p") && (computerGuess === "r")) {
+          wins++;
+        } else if ((userGuess === "p") && (computerGuess === "s")) {
+          losses++;
+        } else if (userGuess === computerGuess) {
+          ties++;
+        }
+        // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+        var html =
+          "<p>You chose: " + userGuess + "</p>" +
+          "<p>The computer chose: " + computerGuess + "</p>" +
+          "<p>wins: " + wins + "</p>" +
+          "<p>losses: " + losses + "</p>" +
+          "<p>ties: " + ties + "</p>";
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+      }
+    };
+  </script>
 
-```markdown
-Syntax highlighted code block
+</body>
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ntecrc/RPS-Multiplayer/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+</html>
